@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "..\\..\\..\\..\\..\\..\\..\\demo\\demo"
+		},
+		{
+			"name": "biblio",
+			"path": "..\\..\\..\\..\\..\\.."
+		}
+	],
+	"settings": {
+		"java.project.sourcePaths": [
+			""
+		],
+		"java.configuration.updateBuildConfiguration": "automatic"
+	}
+}
