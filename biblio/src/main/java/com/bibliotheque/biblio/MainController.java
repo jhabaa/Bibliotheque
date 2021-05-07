@@ -17,14 +17,14 @@ public class MainController {
     @PostMapping(path = "/add")
     public @ResponseBody String addNewUser (@RequestParam String name)
     {
-        User n = new User();
+        Utilisateur n = new Utilisateur();
         n.setUsername("3 pretendants");
         userRepository.save(n);
         return "Saved";
     }
 
     @GetMapping(path = "/all")
-    public @ResponseBody Iterable<User> getAllUsers()
+    public @ResponseBody Iterable<Utilisateur> getAllUsers()
      {
          //Ceci renvoit un JSON ou XML avec tous les utilisateurs
          return userRepository.findAll();
