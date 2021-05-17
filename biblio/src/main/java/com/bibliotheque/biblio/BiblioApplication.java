@@ -5,12 +5,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RestController;
 
 
-@RestController
+//@RestController
 @SpringBootApplication
 public class BiblioApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BiblioApplication.class, args);
 	}
-
 }
