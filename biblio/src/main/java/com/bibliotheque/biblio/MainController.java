@@ -56,10 +56,11 @@ public class MainController {
     }
     @GetMapping(path = "/edit/{id}")
     public String edit(@PathVariable("id") Integer id, Model model){
-        Utilisateur utilisateur = 
+        // non terminé
+        return "all";
     }
 
-    }
+ 
     @GetMapping("/")
     public String showUserList( @PathParam("nom") String name ,Model model) {
        // List<Utilisateur> utilisateur = (List<Utilisateur>) userRepository.findAll();
