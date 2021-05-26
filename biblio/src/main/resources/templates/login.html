@@ -1,17 +1,20 @@
+
 <!DOCTYPE HTML>
-<html >
+<html xmlns:th="https://www.thymeleaf.org">
 <head> 
     <title>BiblioCare</title> 
     <meta http-equiv="Content-Type" content="text/json; charset=UTF-8" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
 </head>
 <body>
-    <h1>BiblioCare</h1>
-   <div class="container">
-      <form action="#" th:action="@{/newUser}" th:object="${Utilisateur}" method="POST">
-         Page en travaux. à revoir après la documentation thymeleaf
-         <input type="text" th:field="*{nom}"/>
-      </form>
-   </div>   
+    <nav>
+        <h1 class="display-1">BiblioHub</h1>
+    </nav>
+    <div class="position-absolute top-50 start-50 translate-middle container">
+        <form>
+            <label class="form-label">Nom d'utilisateur</label>
+                   
+        </form>
+    </div>
 </body>
 </html>

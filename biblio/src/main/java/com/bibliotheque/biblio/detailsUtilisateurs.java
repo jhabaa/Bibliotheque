@@ -2,7 +2,8 @@ package com.bibliotheque.biblio;
 
 import java.util.Arrays;
 import java.util.Collection;
- 
+import java.util.Collections;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,8 +18,9 @@ public class detailsUtilisateurs implements UserDetails {
  
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(utilisateur.getRole());
-        return Arrays.asList(authority);
+        //SimpleGrantedAuthority authority = new SimpleGrantedAuthority(utilisateur.getRole());
+        //return Arrays.asList(authority);
+       return Collections.emptyList();
     }
  
     @Override

@@ -16,10 +16,6 @@ public class serviceUtilisateurs implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Utilisateur utilisateur = userRepository.getUtilisateur(username);
         utilisateur.setPassword(passwordEncoder.encode(utilisateur.getPassword()));
-       if (utilisateur == null){
-           throw new UsernameNotFoundException("Utilisateur non trouvé dans la base");
-       }
-       else 
        
         return new detailsUtilisateurs(utilisateur);
     }

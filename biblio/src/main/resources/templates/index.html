@@ -1,0 +1,60 @@
+
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head> 
+    <title>BiblioCare</title> 
+    <meta http-equiv="Content-Type" content="text/json; charset=UTF-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <h1 class="display-1 ">BiblioHub</h1>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Features</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Pricing</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Panier</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="btn btn-dark" href="/login" tabindex="-1">Connexion</a>
+                  </li>
+                </ul>
+              </div>
+        </div>
+    </nav>
+   <div class="container"></div>
+   	
+        <h3 th:inline="text" class="text-center">Bienvenue 💯 [[${#httpServletRequest.remoteUser}]]</h3>
+        <p th:if="${param.login}"> You are logged</p>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Logout" />
+        </form>
+    <div class="container">
+    </div>
+        <a href="/all" class="btn btn-dark">Toutes les ressources</a>
+    </div>
+    <div class="row row-cols-1 row-cols-md-5 g-4">
+        <div class="col"  th:each="index:${ressources} ">
+            <div class="card">
+                <img width="100" th:src="@{images/img2.png}" class="img-fluid" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title" th:text="${index.titre}">Card title</h5>
+                  <p class="card-text" th:text="${index.resume}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <a href="/toWhishlist" class="btn btn-primary">louer</a>
+                </div>
+              </div>
+        </div>
+    </div>
+    
+    
+</body>
+</html>

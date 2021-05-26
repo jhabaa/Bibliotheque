@@ -7,8 +7,10 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 
 @Configuration
@@ -17,6 +19,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     
     @Bean
     public UserDetailsService userDetailsService(){
+        //UserDetails user = (UserDetails) new serviceUtilisateurs();
+    //return new InMemoryUserDetailsManager(user);
         return new serviceUtilisateurs();
     }
     @Bean
@@ -36,15 +40,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception{
-       /* httpSecurity.formLogin().loginPage("/index")
+       httpSecurity.formLogin().loginPage("/login")
                                 .usernameParameter("nom")
-                                .passwordParameter("password");*/
+                                .passwordParameter("password")
+                                .loginProcessingUrl("/doLogin")
+                                .defaultSuccessUrl("/");
 
         httpSecurity.authorizeRequests()
-                    .anyRequest().authenticated()
+                    .antMatchers("/","/index").permitAll()
+                   // .antMatchers("/all").authenticated()
+                  //  .anyRequest().authenticated()
                     .and()
-                    .formLogin().permitAll()
+                    .formLogin()
+                    .loginPage("/login")
+                    .permitAll()
                     .and()
-                    .logout().permitAll();
+                    .logout().permitAll()
+                    .and().csrf().disable();
+
     }
 }

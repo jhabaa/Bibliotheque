@@ -1,0 +1,87 @@
+
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head> 
+    <title>BiblioCare</title> 
+    <meta http-equiv="Content-Type" content="text/json; charset=UTF-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <h1 class="display-1 ">BiblioHub</h1>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/allressources">Ressources</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Utilisateurs</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="btn btn-success" th:href="@{/logout}" tabindex="-1" aria-disabled="true">Déconnexion</a>
+                  </li>
+                </ul>
+              </div>
+        </div>
+    </nav>
+    <div>
+        <table class="table">
+            <thead class="table-light">
+                <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prenom</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">MP</th>
+                    <th scope="col">Téléphone</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody th:each="utilisateur:${utilisateurs}">
+                <tr>
+                    <td th:text="${utilisateur.nom}"></td>
+                    <td th:text="${utilisateur.prenom}"></td>
+                    <td th:text="${utilisateur.idutilisateur}"></td>
+                    <td th:text="${utilisateur.email}"></td>
+                    <td th:text="${utilisateur.password}"></td>
+                    <td th:text="${utilisateur.telephone}"></td>
+                    <td>
+                        <a th:href="@{/delete/{id} (id=${utilisateur.idutilisateur})}" class="btn btn-danger">Supprimer</a>
+                        <a th:href="@{/update/{id} (id=${utilisateur.idutilisateur})}" class="btn btn-warning">Modifier</a>
+                    </td>
+
+                </tr>    
+            </tbody>
+            <tfoot>
+                <form th:action="@{/newUser}" th:object="${utilisateur}" method="POST" class="form-floating">
+                    <tr>
+                        <td colspan="7" class="text-center display-4">Ou remplir le formulaire pour créer un nouvel utilisateur</td>
+                    </tr>
+                    <tr>
+                        <td><label for="floatingInputValue">Nom</label><input type="text" th:field="*{nom}" class="form-control"></td>
+                        <td><label for="floatingInputValue">Prenom</label><input type="text" th:field="*{prenom}" class="form-control"></td>
+                        <td><label for="floatingInputValue">Email</label><input type="email" th:field="*{email}" class="form-control"></td>
+                        <td><label for="floatingInputValue">Mot de Passe</label><input type="text" th:field="*{password}" class="form-control"></td>
+                        <td><label for="floatingInputValue">Telephone</label><input type="tel" th:field="*{telephone}" class="form-control"></td>
+                    </tr>
+                      
+                    <tr>
+                        <td colspan="7" class="text-center"><input type="submit" value="Enregistrer" class="btn btn-primary"></td>>
+                    </tr>
+                    
+                </form>
+                
+            </tfoot>
+        </table>
+    </div>
+    <p>
+        <div class="align-self-center">
+               
+        </div>
+    </p>
+</body>
+</html>
