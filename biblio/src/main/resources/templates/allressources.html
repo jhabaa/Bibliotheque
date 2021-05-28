@@ -31,11 +31,30 @@
     <div class="row row-cols-1 row-cols-md-5 g-4">
         <div class="col"  th:each="index:${ressources} ">
             <div class="card">
-                <img width="100" th:src="@{images/img2.png}" class="img-fluid text-center" alt="...">
+                <img width="100" th:src="@{images/img2.png}" class="img-fluid" alt="...">
                 <div class="card-body">
-                  <h5 class="card-title" th:text="${index.titre}">Card title</h5>
-                  <p class="card-text" th:text="${index.resume}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="/toWhishlist" class="btn btn-primary">louer</a>
+                  <label>Titre :</label><h5 class="card-title text-center" th:text="${index.titre}"></h5>
+                  <label>Code barre :</label><p class="card-text" th:text="${index.code_barre}"></p>
+                  <label>caution:</label><p class="card-text" th:text="${index.caution}"></p>
+                  <label>Nombre de pages :</label><p class="card-text" th:text="${index.nbrepages}"></p>
+                  <label>Etat :</label><p class="card-text" th:text="${index.etat}"></p>
+                  <label>Rubrique :</label><p class="card-text" th:text="${index.rubrique}"></p>
+                  <label>Nombre d'exemplaires :</label><p class="card-text" th:text="${index.nbredexemplaires}"></p>
+                  <label>Résumé :</label><p class="card-text" th:text="${index.resume}"></p>
+
+                  <a th:href="@{/deleteressource/{id} (id=${index.idres})}" class="btn btn-danger">Supprimer</a>
+                  <a th:href="@{/updateressource/{id} (id=${index.idres})}" class="btn btn-secondary">Editer</a>
+                </div>
+              </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <img width="100" th:src="@{images/img2.png}" class="img-fluid" alt="...">
+                <div class="card-body">
+                    <form th:action="@{/addressource}" th:object="${ressource}" method="POST">
+                        <input type="text" th:field="*{titre}" placeholder="Titre" class="card-title">
+                        <input type="text" th:field="*{resume}" placeholder="Résumé" class="card-text">
+                    </form>
                 </div>
               </div>
         </div>

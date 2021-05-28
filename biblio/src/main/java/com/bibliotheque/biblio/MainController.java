@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 
 import org.apache.catalina.User;
@@ -59,6 +60,14 @@ public class MainController {
         // non terminé
         return "all";
     }
+    @GetMapping("/deleteressource/{id}")
+    public String delete(@PathVariable("id") String id, Model model) throws IllegalAccessException{
+        Ressource ressource = ressourceRepository.findById(id).orElseThrow(
+            () -> new IllegalAccessException("Id ressource non valide :" + id)
+        );
+        ressourceRepository.delete(ressource);
+        return "redirect:/allressources";
+    }
 
  
     @GetMapping("/")
@@ -73,6 +82,11 @@ public class MainController {
     public String newUser(@Valid Utilisateur utilisateur, Model model){
         userRepository.save(utilisateur);
         return "redirect:/all";
+    }
+    @PostMapping("/addressource")
+    public String addRessource(@Valid Ressource ressource, Model model){
+        ressourceRepository.save(ressource);
+        return "redirect:/allressource";
     }
     
     @GetMapping (path = "/all")
