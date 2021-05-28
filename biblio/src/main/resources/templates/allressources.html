@@ -28,55 +28,17 @@
               </div>
         </div>
     </nav>
-    <div>
-        <table class="table">
-            <thead class="table-light">
-                <tr>
-                    <th scope="col">Nom</th>
-                    <th scope="col">Prenom</th>
-                    <th scope="col">ID</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">MP</th>
-                    <th scope="col">Téléphone</th>
-                    <th scope="col">Actions</th>
-                </tr>
-            </thead>
-            <tbody th:each="utilisateur:${utilisateurs}">
-                <tr>
-                    <td th:text="${utilisateur.nom}"></td>
-                    <td th:text="${utilisateur.prenom}"></td>
-                    <td th:text="${utilisateur.idutilisateur}"></td>
-                    <td th:text="${utilisateur.email}"></td>
-                    <td th:text="${utilisateur.password}"></td>
-                    <td th:text="${utilisateur.telephone}"></td>
-                    <td>
-                        <a th:href="@{/delete/{id} (id=${utilisateur.idutilisateur})}" class="btn btn-danger">Supprimer</a>
-                        <a th:href="@{/update/{id} (id=${utilisateur.idutilisateur})}" class="btn btn-warning">Modifier</a>
-                    </td>
-
-                </tr>    
-            </tbody>
-            <tfoot>
-                <form th:action="@{/newUser}" th:object="${utilisateur}" method="POST" class="form-floating">
-                    <tr>
-                        <td colspan="7" class="text-center display-4">Ou remplir le formulaire pour créer un nouvel utilisateur</td>
-                    </tr>
-                    <tr>
-                        <td><label for="floatingInputValue">Nom</label><input type="text" th:field="*{nom}" class="form-control"></td>
-                        <td><label for="floatingInputValue">Prenom</label><input type="text" th:field="*{prenom}" class="form-control"></td>
-                        <td><label for="floatingInputValue">Email</label><input type="email" th:field="*{email}" class="form-control"></td>
-                        <td><label for="floatingInputValue">Mot de Passe</label><input type="text" th:field="*{password}" class="form-control"></td>
-                        <td><label for="floatingInputValue">Telephone</label><input type="tel" th:field="*{telephone}" class="form-control"></td>
-                    </tr>
-                      
-                    <tr>
-                        <td colspan="7" class="text-center"><input type="submit" value="Enregistrer" class="btn btn-primary"></td>>
-                    </tr>
-                    
-                </form>
-                
-            </tfoot>
-        </table>
+    <div class="row row-cols-1 row-cols-md-5 g-4">
+        <div class="col"  th:each="index:${ressources} ">
+            <div class="card">
+                <img width="100" th:src="@{images/img2.png}" class="img-fluid text-center" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title" th:text="${index.titre}">Card title</h5>
+                  <p class="card-text" th:text="${index.resume}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <a href="/toWhishlist" class="btn btn-primary">louer</a>
+                </div>
+              </div>
+        </div>
     </div>
     <p>
         <div class="align-self-center">
