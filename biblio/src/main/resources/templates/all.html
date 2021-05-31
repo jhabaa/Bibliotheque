@@ -28,7 +28,8 @@
               </div>
         </div>
     </nav>
-    <div>
+    
+    <p th:text="'Hello, ' + ${utilisateur.nom} + '!'" />
         <table class="table">
             <thead class="table-light">
                 <tr>
@@ -41,25 +42,26 @@
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
-            <tbody th:each="utilisateur:${utilisateurs}">
+            <tbody th:each="utilisateurs:${utilisateurs}">
                 <tr>
-                    <td th:text="${utilisateur.nom}"></td>
-                    <td th:text="${utilisateur.prenom}"></td>
-                    <td th:text="${utilisateur.idutilisateur}"></td>
-                    <td th:text="${utilisateur.email}"></td>
-                    <td th:text="${utilisateur.password}"></td>
-                    <td th:text="${utilisateur.telephone}"></td>
+                    <td th:text="${utilisateurs.nom}"></td>
+                    <td th:text="${utilisateurs.prenom}"></td>
+                    <td th:text="${utilisateurs.idutilisateur}"></td>
+                    <td th:text="${utilisateurs.email}"></td>
+                    <td th:text="${utilisateurs.password}"></td>
+                    <td th:text="${utilisateurs.telephone}"></td>
                     <td>
-                        <a th:href="@{/delete/{id} (id=${utilisateur.idutilisateur})}" class="btn btn-danger">Supprimer</a>
-                        <a th:href="@{/update/{id} (id=${utilisateur.idutilisateur})}" class="btn btn-warning">Modifier</a>
+                        <a th:href="@{/delete/{id} (id=${utilisateurs.idutilisateur})}" class="btn btn-danger">Supprimer</a>
+                        <a th:href="@{/edit/{id}?id={id} (id=${utilisateurs.idutilisateur})}" class="btn btn-warning">Modifier</a>
                     </td>
 
                 </tr>    
             </tbody>
             <tfoot>
+                <span th:if="${utilisateur.idutilisateur} == null">
                 <form th:action="@{/newUser}" th:object="${utilisateur}" method="POST" class="form-floating">
                     <tr>
-                        <td colspan="7" class="text-center display-4">Ou remplir le formulaire pour créer un nouvel utilisateur</td>
+                            <td colspan="7" class="text-center display-4">Ou remplir le formulaire pour créer un nouvel utilisateur</td> 
                     </tr>
                     <tr>
                         <td><label for="floatingInputValue">Nom</label><input type="text" th:field="*{nom}" class="form-control"></td>
@@ -71,10 +73,27 @@
                       
                     <tr>
                         <td colspan="7" class="text-center"><input type="submit" value="Enregistrer" class="btn btn-primary"></td>>
-                    </tr>
-                    
+                    </tr>  
                 </form>
-                
+                </span>
+                <span th:if="${utilisateur.idutilisateur} != null">
+                    <form th:action="@{/update/{id} (id=${utilisateur.idutilisateur})}" th:object="${utilisateur}" method="POST" class="form-floating">
+                        <tr>
+                                <td colspan="7" class="text-center display-4">Quelles sont les nouvelles valeurs ?</td> 
+                        </tr>
+                        <tr>
+                            <td><label for="floatingInputValue">Nom</label><input type="text" th:field="*{nom}" class="form-control"></td>
+                            <td><label for="floatingInputValue">Prenom</label><input type="text" th:field="*{prenom}" class="form-control"></td>
+                            <td><label for="floatingInputValue">Email</label><input type="email" th:field="*{email}" class="form-control"></td>
+                            <td><label for="floatingInputValue">Mot de Passe</label><input type="text" th:field="*{password}" class="form-control"></td>
+                            <td><label for="floatingInputValue">Telephone</label><input type="tel" th:field="*{telephone}" class="form-control"></td>
+                        </tr>
+                          
+                        <tr>
+                            <td colspan="7" class="text-center"><input type="submit" value="Modifier" class="btn btn-secondary"></td>>
+                        </tr>  
+                    </form>
+                </span>  
             </tfoot>
         </table>
     </div>

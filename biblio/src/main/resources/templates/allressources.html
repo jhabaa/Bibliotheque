@@ -53,7 +53,14 @@
                 <div class="card-body">
                     <form th:action="@{/addressource}" th:object="${ressource}" method="POST">
                         <input type="text" th:field="*{titre}" placeholder="Titre" class="card-title">
+                        <input type="number" th:field="*{code_barre}" placeholder="Code Barre" class="card-text">
+                        <input type="number" th:field="*{caution}" placeholder="Caution" class="card-text">
+                        <input type="number" th:field="*{nbrepages}" placeholder="Nombre de Pages" class="card-text">
+                        <input type="text" th:field="*{etat}" placeholder="Etat" class="card-text">
+                        <input type="text" th:field="*{rubrique}" placeholder="Rubrique" class="card-text">
+                        <input type="number" th:field="*{nbredexemplaires}" placeholder="Nombre d'explemplaires" class="card-text">
                         <input type="text" th:field="*{resume}" placeholder="Résumé" class="card-text">
+                        <p><input class="btn btn-primary" value="Enregistrer" type="submit"></p>
                     </form>
                 </div>
               </div>

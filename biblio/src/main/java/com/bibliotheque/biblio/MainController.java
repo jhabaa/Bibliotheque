@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -40,14 +41,17 @@ public class MainController {
     @PostMapping("/addbook")
     public String addNewBook(@Valid Ressource ressource, Model model) // (@RequestParam( name="id", required = false, defaultValue = "defaultID") String name)
     {
-       // model.addAttribute("ressource", ressource);
-        /*Utilisateur n = new Utilisateur();
-        n.setNom("ddf");
-        n.setUid("777");
-        userRepository.save(n);*/
         ressourceRepository.save(ressource);
         return "New book added";
     }
+    @PostMapping("/update/{id}")
+    public String update(@PathVariable("id") Integer id, @Valid Utilisateur utilisateur, BindingResult result, Model model) throws IllegalAccessException{
+       // model.addAttribute("utilisateur",utilisateur);
+        utilisateur.setIdutilisateur(id);
+        userRepository.save(utilisateur);
+          return "redirect:/all"; 
+       }
+
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") Integer id, Model model) throws IllegalAccessException{
        Utilisateur utilisateur = userRepository.findById(id)
@@ -56,10 +60,14 @@ public class MainController {
         return "redirect:/all";
     }
     @GetMapping(path = "/edit/{id}")
-    public String edit(@PathVariable("id") Integer id, Model model){
-        // non terminé
+    public String edit(@RequestParam(name="id", required = true, defaultValue = "1") Integer id, Model model) throws IllegalAccessException{
+        Utilisateur utilisateur = userRepository.findById(id)
+       .orElseThrow(() -> new IllegalAccessException("Idutilusateur non valide : " + id));
+        model.addAttribute("utilisateur",utilisateur);
+       // model.getAttribute("id");
         return "all";
     }
+
     @GetMapping("/deleteressource/{id}")
     public String delete(@PathVariable("id") String id, Model model) throws IllegalAccessException{
         Ressource ressource = ressourceRepository.findById(id).orElseThrow(
@@ -86,7 +94,7 @@ public class MainController {
     @PostMapping("/addressource")
     public String addRessource(@Valid Ressource ressource, Model model){
         ressourceRepository.save(ressource);
-        return "redirect:/allressource";
+        return "redirect:/allressources";
     }
     
     @GetMapping (path = "/all")

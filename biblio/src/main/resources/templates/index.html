@@ -32,8 +32,7 @@
         </div>
     </nav>
    <div class="container"></div>
-   	
-        <h3 th:inline="text" class="text-center">Bienvenue 💯 [[${#httpServletRequest.remoteUser}]]</h3>
+        <h3 th:inline="text" class="text-center">Bienvenue 💯 </h3>
         <p th:if="${param.login}"> You are logged</p>
         <form th:action="@{/logout}" method="post">
             <input type="submit" value="Logout" />
@@ -49,7 +48,7 @@
                 <div class="card-body">
                   <h5 class="card-title" th:text="${index.titre}">Card title</h5>
                   <p class="card-text" th:text="${index.resume}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="/toWhishlist" class="btn btn-primary">louer</a>
+                  <a href="/toWhishlist" class="btn btn-primary text-center">louer</a>
                 </div>
               </div>
         </div>
