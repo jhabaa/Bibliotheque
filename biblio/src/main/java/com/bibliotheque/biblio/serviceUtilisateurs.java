@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,7 +19,8 @@ public class serviceUtilisateurs implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Utilisateur utilisateur = userRepository.getUtilisateur(username);
         utilisateur.setPassword(passwordEncoder.encode(utilisateur.getPassword()));
-       
+        
+        
         return new detailsUtilisateurs(utilisateur);
     }
 

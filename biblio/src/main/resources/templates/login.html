@@ -4,17 +4,34 @@
 <head> 
     <title>BiblioCare</title> 
     <meta http-equiv="Content-Type" content="text/json; charset=UTF-8" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha512-dLxUelApnYxpLt6K2iomGngnHO83iUvZytA3YjDUCjT0HDOHKXnVYdf3hU4JjM8uEhxf9nD1/ey98U3t2vZ0qQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="css.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.birds.min.js" integrity="sha512-iIWwQewCNqw+4f09oyZvCkBUNEuVfCSOtFzQW6dzvsm46yuToWTcL9uUEAyTnV0fG90jyCiiURE4yEgLclpoZA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
 </head>
-<body>
-    <nav>
-        <h1 class="display-1">BiblioHub</h1>
-    </nav>
-    <div class="position-absolute top-50 start-50 translate-middle container">
-        <form>
-            <label class="form-label">Nom d'utilisateur</label>
-                   
+<body id="body" class="login">
+  <div class="head">
+    <a  href="/" class="title">BiblioHub</a>
+  </div>
+
+    <div th:if="${param.error}" class="notification">
+        Erreur de Connexion
+    </div>
+    <div class="bloc">
+      
+        <form th:action="@{/doLogin}" class="" method="POST">
+          <img src="/images/1.png" alt="" width="200px">
+            <input type="text" placeholder="Utilisateur" name="nom"
+            class="text-zone"><p></p>
+            
+          <!--<span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}" class="text-white"> Ce nom n'existe pas</span> --> 
+            <input type="password" placeholder="Mot de Passe" name="password" 
+            class="text-zone"><p></p>
+            <input type="submit" value="Se connecter" class="p-btn">         
         </form>
     </div>
+ 
+    
 </body>
+<script src="js.js"></script>
 </html>

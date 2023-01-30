@@ -8,7 +8,18 @@
             "console": "internalConsole",
             "mainClass": "com.biblio.demo.DemoApplication",
             "projectName": "demo",
-            "args": ""
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-BiblioApplication<biblio>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.bibliotheque.biblio.BiblioApplication",
+            "projectName": "biblio",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }

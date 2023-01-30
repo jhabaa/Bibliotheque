@@ -1,5 +1,8 @@
 package com.bibliotheque.biblio;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -19,8 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     
     @Bean
     public UserDetailsService userDetailsService(){
-        //UserDetails user = (UserDetails) new serviceUtilisateurs();
-    //return new InMemoryUserDetailsManager(user);
+    
         return new serviceUtilisateurs();
     }
     @Bean
@@ -37,19 +39,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
         auth.authenticationProvider(authenticationProvider());
+
     }
+
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception{
        httpSecurity.formLogin().loginPage("/login")
                                 .usernameParameter("nom")
                                 .passwordParameter("password")
                                 .loginProcessingUrl("/doLogin")
-                                .defaultSuccessUrl("/");
+                                .defaultSuccessUrl("/")
+                                .failureUrl("/login?error=true")
+                                ;
 
         httpSecurity.authorizeRequests()
                     .antMatchers("/","/index").permitAll()
-                   // .antMatchers("/all").authenticated()
-                  //  .anyRequest().authenticated()
+                   .antMatchers("/all").authenticated()
+                  //.anyRequest().authenticated()
                     .and()
                     .formLogin()
                     .loginPage("/login")
@@ -57,6 +63,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .and()
                     .logout().permitAll()
                     .and().csrf().disable();
+        httpSecurity.sessionManagement()
+                    .invalidSessionUrl("/login")
+                    ;
 
     }
 }

@@ -1,0 +1,438 @@
+@mixin google-font($family) {
+    @import url("https://fonts.googleapis.com/css?family=#{$family}");
+}
+
+@include google-font("Montserrat");
+@include google-font("Raleway");
+@include google-font("Ubuntu");
+@include google-font("Marcellus SC");
+
+$smarthponeScreen: 750px;
+$PCScreen: 751px;
+/* On remet le CSS à zéro */
+*,
+::before,
+::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family:"Montserrat";
+}
+body {
+    font-family: 'Ubuntu', sans-serif;
+    height: 100vh;
+    font-size: 16px;
+    color: #333;
+    background:inherit;
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    &.login{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .head{
+        display: flex;
+        
+        justify-content: center;
+
+        width: 100%;
+       
+        .title{
+            padding: 20px;
+            text-justify: center;
+            font-size: 10vw;
+            font-family: "Ubuntu";
+            text-decoration: none;
+            color: rgb(45, 45, 45);
+            text-shadow: 2px 20px 10px rgb(104, 104, 104);
+            &:visited{
+                color: rgb(45, 45, 45);
+                text-decoration: none;
+                text-decoration-style: none;
+                
+            }
+        }
+        
+    }
+    @keyframes notif{
+        0%{
+            opacity: 1;
+            transform: translateY(40px);
+        }
+        100%{
+            opacity: 0;
+            transform: translateY(0);
+        }
+    }
+    
+    .notification{
+        position: absolute;
+        transform: translateY(40px);
+        opacity: 0;
+        top: 30px;
+        background-color: red;
+        padding: 10px;
+        color: white;
+        animation: 2s ease-in notif;
+    }
+
+    .bloc{
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        background: inherit;
+        form{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background-color: inherit;
+            border-radius: 1rem;
+            box-shadow:  2px 10px 20px 2px #333;
+            overflow: hidden;
+            img{
+                position: absolute;
+                top: -100px;
+                z-index: -1;
+            }
+            ::before{
+                content: "";
+                position: absolute;
+                inset: 0;
+                background: inherit;
+                z-index: -1;
+                filter: blur(50px);
+                overflow: hidden;
+                //backdrop-filter: blur(10px);
+            }
+            .text-zone{
+                width: 100%;
+                padding: 20px;
+                margin: 20px;
+                border: 1px solid #ccc;
+                border-radius: 2rem;
+                resize: vertical;
+                text-align: center;
+            }
+            .p-btn{
+                width: 100%;
+                padding: 10px;
+                margin: 20px;
+                border: 1px solid #ccc;
+                border-radius: 2rem;
+                resize: vertical;
+                background-color: navy;
+                color: white;
+                font-size: 16px;
+                font-weight: bold;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .container-fluid{
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        gap: 50px;
+        .fluid{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgb(248, 248, 248);
+            width: 300px;
+            height: 250px;
+            justify-content: center;
+            transform: scale(1);
+            filter: grayscale(100%);
+            transition: 0.5s all ease-in-out;
+
+            &.disabled{
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
+            &:hover{
+                filter: grayscale(0%);
+                transform: scale(1.1);
+                box-shadow:  2px 10px 20px 2px #333;
+                &.disabled{
+                    filter: grayscale(100%);
+                    transform: scale(1);
+                    opacity: 0.5;
+                    cursor: not-allowed;
+                    box-shadow:  none;
+                }
+            }
+            .nav-link{
+                color: rgb(255, 255, 255);
+                text-decoration: none;
+                text-decoration-style: none;
+                position: absolute;
+                display: flex;
+                align-self: center;
+                justify-content: center;
+                justify-self: center;
+                font-family: "Ubuntu";
+                font-size: 60px;
+                filter: drop-shadow(2px 2px 2px rgb(0, 0, 0));
+                :visited{
+                    color: #333;
+                    text-decoration: none;
+                    text-decoration-style: none;
+                }
+            }
+            img{
+                width: 90%;
+                &.toGray{
+                    filter: grayscale(100%);
+                }
+                
+            }
+        }
+    }
+    .container-fluid2{
+        display: flex;
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+        font-size: 2.4vw;
+        .nav-link{
+            color: #333;
+            text-decoration: none;
+            :visited{
+                text-decoration: #333;
+                color: #333;
+            }
+        }
+        .d-btn{
+            padding: 5px;
+            background-color: black;
+            color: white;
+            border: 1px solid #ccc;
+            border-radius: 2rem;
+            text-decoration: none;
+            :visited{
+                text-decoration: none;
+            }
+        }
+    }
+    .citation{
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        width: 100%;
+        padding-top: 100px;
+        padding-bottom: 100px;
+        flex-wrap: wrap;
+        background-color: #ccc;
+        gap: 100%;
+        ::after{
+            content: "Aucune citation n'est disponible pour le moment";
+            flex-wrap: wrap;
+            width: 100%;
+            color: rgb(255, 255, 255);
+            inset: 0;
+            z-index: -1;
+            padding: 10px;
+            font-size: 20px;
+            background-color: #333;
+        }
+    }
+
+    .userscontainer{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        .usercard{
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+            height: 400px;
+            align-items: center;
+            transition: 0.4s all ease-in-out;
+            margin: 20px;
+            background: rgb(144, 144, 144);
+            color: white;
+            &.book{
+                height: max-content;
+                
+            }
+            &.show{
+                box-shadow:  2px 10px 20px 2px #333;
+
+            }
+            .infos{
+                display:flex ;
+                flex-direction: column;
+                align-items: center;
+                width:  100% ;
+                .money{
+                    ::after{
+                        content: "€";
+                    }
+                }
+                &.hide{
+                    display: none;
+                }
+                .gestion{
+                    background-color: rgb(215, 215, 215);
+                    color: white;
+                    height: 100px;
+                    width: 100%;
+                    padding: 10px;
+                    display: flex;
+                    justify-content: space-around;
+
+                    .del-btn{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background-color: rgb(255, 0, 0);
+                        opacity: 0.8;
+                        color: white;
+                        border: 1px solid rgb(0, 0, 0);
+                        border-radius: 2rem;
+                        text-decoration: none;
+                        cursor: pointer;
+                        :visited{
+                            text-decoration: none;
+                        }
+                    }
+                    .mod-btn{
+                        background-color: rgb(0, 110, 255);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        color: white;
+                        border: 1px solid #ccc;
+                        border-radius: 2rem;
+                        text-decoration: none;
+                        cursor: pointer;
+                        :visited{
+                            text-decoration: none;
+                        }
+                    }
+                }
+            }
+        
+            &.hide{
+                background: inherit;
+                color: inherit;
+                .infos{
+                    display:none ;
+                    flex-direction: column;
+                    align-items: center;
+                    width:  100% ;
+                    .gestion{
+                        background-color: rgb(215, 215, 215);
+                        color: white;
+                        height: 100px;
+                        width: 100%;
+                        padding: 10px;
+                        display: flex;
+                        justify-content: space-around;
+    
+                        .del-btn{
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            background-color: rgb(255, 0, 0);
+                            opacity: 0.8;
+                            color: white;
+                            border: 1px solid rgb(0, 0, 0);
+                            border-radius: 2rem;
+                            text-decoration: none;
+                            cursor: pointer;
+                            :visited{
+                                text-decoration: none;
+                            }
+                        }
+                        .mod-btn{
+                            background-color: rgb(0, 110, 255);
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            color: white;
+                            border: 1px solid #ccc;
+                            border-radius: 2rem;
+                            text-decoration: none;
+                            cursor: pointer;
+                            :visited{
+                                text-decoration: none;
+                            }
+                        }
+                    }
+                }
+            
+            }
+            &.form{
+                background-color: #e3e3e3;
+                display: flex;
+                flex-direction: column;
+                border-radius: 20px;
+                align-items: center;
+                justify-content: space-around;
+
+            }
+            form{
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                height: 100%;
+                width: 90%;
+                gap: 10px;
+                input{
+                    height: 50px;
+                    border-radius: 2rem;
+                    text-align: center;
+                    border: none;
+                }
+                .p-btn{
+                    background-color: chartreuse;
+                    font-weight: 700;
+                }
+            }
+            img{
+                width: 200px;
+                height: 200px;
+                border-radius: 50%;
+                border-color: 2px #333 solid;
+                box-shadow: 2px 10px 20px 2px #333;
+                object-fit: cover;
+                //background-color: #333;
+            }
+            .name{
+                font-size: 40px;
+                font-weight: bold;
+                color: #333;
+                text-align: center;
+            }
+            
+            
+        }
+    }
+}
+
+footer{
+    position: fixed;
+    width: 100%;
+    display: block;
+    color: #ccc;
+    text-align: center;
+    padding:10px;
+    align-content: center;
+    justify-content: center;
+    bottom: 0px;
+    background-color: #333;
+}

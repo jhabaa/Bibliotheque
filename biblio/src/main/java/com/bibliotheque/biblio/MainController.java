@@ -4,11 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import javax.websocket.server.PathParam;
-
+import org.springframework.validation.BindingResult; 
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,12 +26,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javassist.expr.NewArray;
 
-@BindingResult
+@Scope("request")
 @Controller
 @RequestMapping(path="/")
 public class MainController {
@@ -36,6 +42,9 @@ public class MainController {
     private UserRepository userRepository;
     @Autowired
     private ressourceRepository ressourceRepository;
+    @Autowired
+    private RestTemplate restTemplate;
+
     
     @ResponseBody
     @PostMapping("/addbook")
@@ -79,9 +88,11 @@ public class MainController {
 
  
     @GetMapping("/")
-    public String showUserList( @PathParam("nom") String name ,Model model) {
+    public String showUserList( Model model, HttpSession session, Utilisateur utilisateur) {
        // List<Utilisateur> utilisateur = (List<Utilisateur>) userRepository.findAll();
-        model.addAttribute("book", new Ressource());
+        session.setAttribute("info", model.getAttribute("utilisateur"));
+       model.addAttribute("book", new Ressource());
+        model.addAttribute("utilisateur", new Utilisateur());
         return "index";
     }
 
@@ -103,7 +114,6 @@ public class MainController {
          model.addAttribute("utilisateur", new Utilisateur());
          //Ceci renvoit un JSON ou XML avec tous les utilisateurs
         return "all";
-        // return (Utilisateur) userRepository.findAll();
      }
      @GetMapping(value = "subscription")
      //@GetMapping("/subscription")
@@ -126,6 +136,14 @@ public class MainController {
     public Iterable<Ressource> ressources(){
         return ressourceRepository.findAll();
     }
+     //Malheureusement cette API ne fonctionne plus
+    /* @ModelAttribute("bookInfo")
+    public String getCitation(){
+        Citation citation = restTemplate.getForObject("https://quoters.apps.pcfone.io/api/random", 
+        Citation.class);
+        return citation.toString();
+    } */
+
       /*  @RequestMapping(value = "/subscription", method = RequestMethod.GET)
     public String utilisateurs(Model model) {
     model.addAttribute("utilisateurs", utilisateurs);
@@ -137,5 +155,17 @@ public class MainController {
     model.addAttribute("ressource", new Ressource());
             return "allressources";
     }
+    @RequestMapping("/login?{error}")
+    public String connect(@Valid @ModelAttribute("utilisateur") @RequestParam(name="error", required = false)Utilisateur utilisateur){
+
+        return "index"; 
+    }
+  /*  @ModelAttribute("session")
+    public String sessionparam(HttpSession session){
+        session.setAttribute("utilisateur", new Utilisateur());
+        Utilisateur utilisateur = (Utilisateur)session.getAttribute("utilisateur");
+        String sessionId = session.getId();
+        return sessionId.toString();
+    }*/
 }
 
