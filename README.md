@@ -13,4 +13,3 @@ Les consignes sont les suivantes :
  
   ![Interface Web](2.jpeg?raw=true "Interface de l'application")
   ![Interface Web](1.jpeg?raw=true "Interface de l'application")
-  ![Interface Web](4.jpeg?raw=true "Interface de l'application")
