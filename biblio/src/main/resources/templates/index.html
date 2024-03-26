@@ -5,49 +5,58 @@
     <title>BiblioCare</title> 
     <meta http-equiv="Content-Type" content="text/json; charset=UTF-8" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha512-dLxUelApnYxpLt6K2iomGngnHO83iUvZytA3YjDUCjT0HDOHKXnVYdf3hU4JjM8uEhxf9nD1/ey98U3t2vZ0qQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link rel="stylesheet" href="css.css">
+    <link rel="stylesheet" href="./css.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.birds.min.js" integrity="sha512-iIWwQewCNqw+4f09oyZvCkBUNEuVfCSOtFzQW6dzvsm46yuToWTcL9uUEAyTnV0fG90jyCiiURE4yEgLclpoZA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body id="body">
-  <div class="head">
-    <a class="title">BiblioHub</a>
-  </div> 
-      <div class="container-fluid ">
-          <div class="fluid">
-            <a class="nav-link" aria-current="page" href="/">Home</a>
-            <img src="/images/5.png" alt="logo">
-          </div>
-          <div class="fluid">
-            <a class="nav-link" href="/all">Gestion</a>
-            <img src="/images/3.png" alt="logo">
-          </div>
-          <div class="fluid disabled">
-            <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Panier</a>
-            <img src="/images/4.png" alt="logo">
-          </div>
-          <div class="fluid">
-            <a class="nav-link" href="/login" tabindex="-1">Connexion</a>
-            <img src="/images/1.png" alt="logo">
-          </div>  
+  <header th:fragment="header">
+    <div class="header_menu">
+      <a href="/">Home</a>
+      <a href="/all">Gestion</a>
+      <a href="#" th:if="${principal != null}" >panier</a>
+      <a href="#" id="connexion_btn" class="">Connexion</a>
+      <div class="connexion_form">
+        <form th:action="@{/doLogin}" class="form" method="POST">
+            <input type="text" placeholder="Utilisateur" name="nom"
+            class="text-zone"><p></p>
+            
+          <!--<span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}" class="text-white"> Ce nom n'existe pas</span> --> 
+            <input type="password" placeholder="Mot de Passe" name="password" 
+            class="text-zone"><p></p>
+            <input type="submit" value="Se connecter" class="p-btn">         
+        </form>
       </div>
-   <div class="citation">
-    <p>Citations de nos auteurs 😃</p>
-    <!-- <span th:text="${bookInfo}"></span>  API plus dispo-->
-  </div>
+    </div>
+  </header>
+  <main>
+    <div class="head">
+      <div class="front">
+        <span class="title">RebelBooks</span>
+        <p> Défiez l'ordinaire, lisez extraordinairement</p>
+      </div>
+      <!--Background Image-->
+      <img src="./images/lib2.jpg" alt="logo">
+    </div>
 
-    <div class="container">
-    <div class="row row-cols-1 row-cols-md-5 g-4">
-        <div class="col"  th:each="index:${ressources} ">
-            <div class="card">
-                <img width="100" th:src="@{images/img2.png}" class="img-fluid" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title" th:text="${index.titre}">Card title</h5>
-                  <p class="card-text" th:text="${index.resume}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="/toWhishlist" class="btn btn-primary text-center disabled">louer</a>
-                </div>
-              </div>
+    <div class="books" th:fragment="books">
+      <div class="book"  th:each="book:${ressources} ">
+        <div class="up">
+          <img width="100" th:src="${book.image}" class="img-fluid" alt="...">
+          <p th:text="${book.titre}"></p>
         </div>
-    </div>   
+        
+        
+        <div class="book-body">
+          <p><span class="pages" th:text="${book.nbrepages}"></span> pages</p>
+          <p class="rubrique" th:text="${book.rubrique}"></p>
+          <p class="resume" th:text="${book.resume}"></p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+     
 </body>
 <footer class="citationr">
   <span th:text="${session}"></span>

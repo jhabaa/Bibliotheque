@@ -9,33 +9,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.birds.min.js" integrity="sha512-iIWwQewCNqw+4f09oyZvCkBUNEuVfCSOtFzQW6dzvsm46yuToWTcL9uUEAyTnV0fG90jyCiiURE4yEgLclpoZA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body id="body">
-    <div class="head">
-        <h1 class="title">BiblioHub</h1>
-    </div> 
-        <div class="container-fluid2">
-                    <a class="nav-link" aria-current="page" href="/">Home</a>
-                    <a class="nav-link" href="/allressources">Ressources</a>
-                    <a class="nav-link" href="/all">Utilisateurs</a>
-                    <a class="d-btn" th:href="@{/logout}" tabindex="-1" aria-disabled="true">Déconnexion</a>
-        </div>
-        
+    <header th:replace="~{index :: header}"></header>
         <div class="userscontainer">
-            <div th:each="utilisateurs:${utilisateurs}" class="usercard hide" id="card">
-                
-                    <img th:src="@{images/hean.png}" alt=" ">
-                    <span th:text="${utilisateurs.nom}" class="name"></span>
-                    <div class="infos">
-                        <span th:text="${utilisateurs.prenom}"class="surname"></span>
-                        <span th:text="${utilisateurs.idutilisateur}" class="id"></span>
-                        <span th:text="${utilisateurs.email}" class="email"></span>
-                        <span th:text="${utilisateurs.password}" class="password"></span>
-                        <span th:text="${utilisateurs.telephone}" class="phone"></span>
-                        <span class="gestion">
-                            <a th:href="@{/delete/{id} (id=${utilisateurs.idutilisateur})}" class="del-btn">Supprimer</a>
-                            <a th:href="@{/edit/{id}?id={id} (id=${utilisateurs.idutilisateur})}" class="mod-btn">Modifier</a>
-                        </span>
-                    </div>      
-            </div>
             <div th:if="${utilisateur.idutilisateur} == null" class="usercard form">
                 <form th:action="@{/newUser}" th:object="${utilisateur}" method="POST" class="form">
                         <span><label for="floatingInputValue"></label><input type="text" th:field="*{nom}" class="form-control" placeholder="nom" value="nom"></span>
@@ -47,6 +22,31 @@
                     
                 </form>
             </div>
+            <div th:each="utilisateurs:${utilisateurs}" class="usercard" id="card">
+                    <img th:src="@{images/hean.png}" alt="pp"/>
+                    <span th:text="${utilisateurs.nom}" class="name"></span>
+                    <div class="infos">
+                        <span th:text="${utilisateurs.prenom}"class="surname"></span>
+                        <span th:text="${utilisateurs.idutilisateur}" class="id"></span>
+                        <span th:text="${utilisateurs.email}" class="email"></span>
+                        <span th:text="${utilisateurs.password}" class="password"></span>
+                        <span th:text="${utilisateurs.telephone}" class="phone"></span>
+                        <span class="gestion">
+                            <a th:href="@{/delete/{id} (id=${utilisateurs.idutilisateur})}" class="del-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="red" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+                                  </svg>
+                            </a>
+                            <a th:href="@{/edit/{id}?id={id} (id=${utilisateurs.idutilisateur})}" class="mod-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                                  </svg>
+                            </a>
+                        </span>
+                    </div>      
+            </div>
+            
 
         </div>
         <table class="table">

@@ -25,11 +25,201 @@ body {
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: black;
 }
 body.login {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+body header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  padding: 10px;
+  color: white;
+  position: fixed;
+  z-index: 3;
+  transition: all 0.5s ease-in-out ;
+}
+body header .header_menu{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-inline: 10px;
+  z-index: 3;
+  transition: all 0.5s ease-in-out ;
+  background-color: #111111;
+  padding-block: 5px;
+  border-radius: 2.5rem;
+}
+body header .header_menu a{
+  color: white;
+  text-decoration: none;
+  text-decoration-style: none;
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 2rem;
+  cursor: pointer;
+  z-index: 3;
+  transition: all 0.5s ease-in-out ;
+}
+
+body header .header_menu .connexion_form{
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  color: black;
+  width: 0px;
+  transform-origin: left;
+  transform: scaleX(0);
+  overflow: hidden;
+  transition: all 0.5s ease-in-out ;
+}
+body header .header_menu .connexion_form form{
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  color: black;
+  gap: 5px;
+  background-color: #111111;
+  border: 1px solid #ccc;
+  border-radius: 2rem;
+  transition: all 0.5s ease-in-out ;
+}
+body header .header_menu .connexion_form form input{
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 2rem;
+  cursor: pointer;
+  z-index: 3;
+  transition: all 0.5s ease-in-out ;
+}
+body header .header_menu .active{
+  color: black;
+  display: flex;
+  width: max-content;
+  transform-origin: left;
+  transform: scaleX(1);
+
+  transition: all 0.5s ease-in-out ;
+}
+
+body main{
+  background-color: black;
+}
+body main .head{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 50vh;
+  color: white;
+  position: fixed;
+  padding: unset;
+  margin: unset;
+  z-index: 2;
+  position: fixed;
+  opacity: 1;
+}
+body main .head .front{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;;
+  z-index: 5;
+  
+}
+body main .head .front p{
+  font-family: "MArcellus SC";
+  font-size: 2vw;
+}
+body main .head img{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(45%);
+  z-index: 1;
+}
+
+body main .books{
+  width: 100%;
+  padding-top: 60vh;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+body main .books .book{
+  background-color: #111111;
+  max-width: 400px;
+  min-width: 210px;
+  max-height: 500px;
+  min-height: 300px;
+  width: 24vw;
+  height: 10vh;
+  padding: 10px;
+  margin: 10px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+body main .books .book .up{
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+  width: 100%;
+  flex-wrap: nowrap;
+  text-overflow: ellipsis;
+  height: 50%;
+  gap: 5px;
+  overflow: hidden;
+  align-items: start;
+}
+body main .books .book .up p{
+  margin-top: 10px;
+  width: 100%;
+  font-size: 1.5vw;
+  font-weight: bold;
+  color: white;
+  text-overflow: ellipsis;
+  white-space: wrap;
+  overflow: hidden;
+}
+body main .books .book .book-body{
+  display: flex;
+  flex-direction: column;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  align-items: start;
+}
+body main .books .book .book-body .rubrique{
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  white-space: wrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 12px;
+  max-height: 50px;
+}
+body main .books .book .book-body .resume{
+  white-space: wrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 12px;
+  color: #ccc;
+  margin-top: 10px;
+  align-items: start;
 }
 body .head {
   display: flex;
@@ -42,7 +232,7 @@ body .head .title {
   font-size: 10vw;
   font-family: "Ubuntu";
   text-decoration: none;
-  color: rgb(45, 45, 45);
+  color: #e3e3e3;
   text-shadow: 2px 20px 10px rgb(104, 104, 104);
 }
 body .head .title:visited {
@@ -136,7 +326,6 @@ body .container-fluid .fluid {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: rgb(248, 248, 248);
   width: 300px;
   height: 250px;
   justify-content: center;
@@ -237,7 +426,10 @@ body .citation ::after {
 body .userscontainer {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-top: 100px;
 }
 body .userscontainer .usercard {
   display: flex;
@@ -247,8 +439,8 @@ body .userscontainer .usercard {
   align-items: center;
   transition: 0.4s all ease-in-out;
   margin: 20px;
-  background: rgb(144, 144, 144);
   color: white;
+  text-align: left;
 }
 body .userscontainer .usercard.book {
   height: max-content;
@@ -261,6 +453,7 @@ body .userscontainer .usercard .infos {
   flex-direction: column;
   align-items: center;
   width: 100%;
+  opacity: 0.8;
 }
 body .userscontainer .usercard .infos .money ::after {
   content: "€";
@@ -269,7 +462,6 @@ body .userscontainer .usercard .infos.hide {
   display: none;
 }
 body .userscontainer .usercard .infos .gestion {
-  background-color: rgb(215, 215, 215);
   color: white;
   height: 100px;
   width: 100%;
@@ -281,11 +473,7 @@ body .userscontainer .usercard .infos .gestion .del-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgb(255, 0, 0);
   opacity: 0.8;
-  color: white;
-  border: 1px solid rgb(0, 0, 0);
-  border-radius: 2rem;
   text-decoration: none;
   cursor: pointer;
 }
@@ -293,13 +481,10 @@ body .userscontainer .usercard .infos .gestion .del-btn :visited {
   text-decoration: none;
 }
 body .userscontainer .usercard .infos .gestion .mod-btn {
-  background-color: rgb(0, 110, 255);
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  border: 1px solid #ccc;
-  border-radius: 2rem;
   text-decoration: none;
   cursor: pointer;
 }

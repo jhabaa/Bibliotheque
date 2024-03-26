@@ -40,6 +40,8 @@ public class Ressource{
     private String rubrique;
     private Integer nbredexemplaires;
     private String resume;
+    private String auteur;
+    private String image;
 
     @Id @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid")

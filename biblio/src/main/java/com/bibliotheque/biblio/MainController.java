@@ -1,3 +1,11 @@
+/**
+ * This class is the main controller for the Bibliotheque application.
+ * It handles the HTTP requests and manages the CRUD operations for users and resources.
+ * The controller is responsible for rendering the appropriate views and interacting with the database.
+ * It also includes methods for adding new books, updating user information, deleting users and resources,
+ * and retrieving lists of users and resources.
+ * Additionally, it handles user authentication and session management.
+ */
 package com.bibliotheque.biblio;
 
 import java.util.ArrayList;
@@ -32,6 +40,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javassist.expr.NewArray;
+
+import java.security.Principal;
 
 @Scope("request")
 @Controller
@@ -88,12 +98,13 @@ public class MainController {
 
  
     @GetMapping("/")
-    public String showUserList( Model model, HttpSession session, Utilisateur utilisateur) {
+    public String showUserList( Model model, HttpSession session, Utilisateur utilisateur, Principal principal) {
        // List<Utilisateur> utilisateur = (List<Utilisateur>) userRepository.findAll();
-        session.setAttribute("info", model.getAttribute("utilisateur"));
-       model.addAttribute("book", new Ressource());
-        model.addAttribute("utilisateur", new Utilisateur());
-        return "index";
+       session.getAttribute("info");
+       model.addAttribute("books", new Ressource());
+       model.addAttribute("utilisateur", utilisateur);
+       model.addAttribute("principal", (principal != null) ? principal.getName() : null);
+       return "index";
     }
 
 
@@ -156,8 +167,8 @@ public class MainController {
             return "allressources";
     }
     @RequestMapping("/login?{error}")
-    public String connect(@Valid @ModelAttribute("utilisateur") @RequestParam(name="error", required = false)Utilisateur utilisateur){
-
+    public String connect(@Valid @ModelAttribute("utilisateur") @RequestParam(name="error", required = false)Utilisateur utilisateur, HttpSession session){
+        session.setAttribute("info", utilisateur);
         return "index"; 
     }
   /*  @ModelAttribute("session")
@@ -168,4 +179,8 @@ public class MainController {
         return sessionId.toString();
     }*/
 }
+
+/*
+ * 
+ */
 
